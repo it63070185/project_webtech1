@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Athiti&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link href="style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+    function btnfunction(){
+        $("html, body").animate({scrollTop:0},"slow");
+        }
+    $(document).ready(function(){
+        $("a").on('click', function(event) {
+
+            if (this.hash !== "") {
+            event.preventDefault();
+
+            var hash = this.hash;
+
+
+            $('html, body').animate({
+                scrollTop: $(hash).offset().top
+            }, 800, function(){
+        
+
+                window.location.hash = hash;
+            });
+            } // End if
+        });
+        });
+    
+var TxtRotate = function(el, toRotate, period) {
+  this.toRotate = toRotate;
+  this.el = el;
+  this.loopNum = 0;
+  this.period = parseInt(period, 100) || 4000;
+  this.txt = '';
+  this.tick();
+  this.isDeleting = false;
+};
+
+TxtRotate.prototype.tick = function() {
+  var i = this.loopNum % this.toRotate.length;
+  var fullTxt = this.toRotate[i];
+
+  if (this.isDeleting) {
+    this.txt = fullTxt.substring(0, this.txt.length - 1);
+  } else {
+    this.txt = fullTxt.substring(0, this.txt.length + 1);
+  }
+
+  this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
+
+  var that = this;
+  var delta = 150 - Math.random() * 100;
+
+  if (this.isDeleting) { delta /= 2; }
+
+  if (!this.isDeleting && this.txt === fullTxt) {
+    delta = this.period;
+    this.isDeleting = true;
+  } else if (this.isDeleting && this.txt === '') {
+    this.isDeleting = false;
+    this.loopNum++;
+    delta = 1000;
+  }
+
+  setTimeout(function() {
+    that.tick();
+  }, delta);
+};
+
+window.onload = function() {
+  var elements = document.getElementsByClassName('txt-rotate');
+  for (var i=0; i<elements.length; i++) {
+    var toRotate = elements[i].getAttribute('data-rotate');
+    var period = elements[i].getAttribute('data-period');
+    if (toRotate) {
+      new TxtRotate(elements[i], JSON.parse(toRotate), period);
+    }
+  }
+  // INJECT CSS
+  var css = document.createElement("style");
+  css.type = "text/css";
+  css.innerHTML = ".txt-rotate > .wrap { border-right: 0.08em solid #F26921 }";
+  document.body.appendChild(css);
+};
+
+</script> 
+</head>
+<body>
+<button onclick="btnfunction()" id="btnscrolltotop">
+    <i class="material-icons">arrow_upward</i>
+</button>
+<header>
+       <nav class="navbar navbar-expand-lg navbar-light pl-5 pr-5">
+            <a class="navbar-brand" href="index.html">My Profile</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-lg-auto">
+                <li class="nav-item active">
+                    <a class="nav-link p-3" href="#h">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link p-3" href="#e">Education</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link p-3" href="#a">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link p-3" href="#hb">Hobby</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link p-3" href="#s">Skill</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link p-3" href="#m">Me</a>
+                </li>
+                </ul>
+                
+            </div>
+            </nav>
+         </header>
+         <!--section1-->
+         <section class ="banner" id="h">
+            <div class="container">
+                <div class="row"> 
+                    <div class="col-sm-6">
+                        <h2>My nickname is <span
+          class="txt-rotate"
+          data-period="2000"
+          data-rotate='[ " Palm"]'></span>
+   </span></h2>
+                        <p>สวัสดีครับ นี่คือ Webpage Profile ของผม ทุกคนจะสามารถรู้จักผมเพิ่มเติมได้ใน Profile นี้เลยครับ
+                        </p>
+                    </div>
+                    <div class="col-sm-1">  
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="card" style="width: 20rem;">
+                        <img src="p1.png" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">นายอภิรัฐ จำนงค์รัตน์ 63070185 นักศึกษาชั้นปีที่ 2</h5>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         </section>
+         <!--section2-->
+         <section class ="banner2" id="e">
+            <div class="container">
+            <div class="col-sm-12 d-flex justify-content-center mb-5">
+            <h1>EDUCATION</h1>
+            </div>
+            
+                <div class="row d-flex justify-content-around mt-3">
+                    <div class="text-center box mt-3">
+                        <h2>01</h2>
+                        <h3>อนุบาล</h3>
+                        <p>โรงเรียนมัธยมนพคุณ</p>
+                        <img src="s1.png" width="50%">
+                    </div>
+                    <div class="text-center box mt-3">
+                        <h2>02</h2>
+                        <h3>ประถม</h3>
+                        <p>โรงเรียนมัธยมนพคุณ</p>
+                        <img src="s1.png" width="50%">
+                    </div>
+                    <div class="text-center box mt-3">
+                        <h2>03</h2>
+                        <h3>มัธยม</h3>
+                        <p>โรงเรียนสาธิตมหาวิทยาลัยราชภัฏเพชรบุรี</p>
+                        <img src="s2.png" width="50%">
+                    </div>
+                </div>
+            </div>
+         </section>
+         <!--section3-->
+         <section class="banner4" id="a">
+            <div class="container">
+            <div class="col-sm-12 d-flex justify-content-center mb-5">
+            <h1>ABOUT ME</h1>
+            </div>
+                <div class="row d-flex justify-content-around mt-3">
+                    <div class=" box3 mt-3 row"><br>
+                        <h2>ข้อมูลส่วนตัว</h2>
+                        <div class="col-5">
+                        <h4>ชื่อ-สกุล</h4>
+                        <p>อภิรัฐ จำนงค์รัตน์</p>
+                        <h4>ชื่อเล่น</h4>
+                        <p>ปาล์ม</p>
+                        <h4>วันเกิด</h4>
+                        <p>1 พ.ย. 2001</p>
+                        <h4>ปัจจุบันศึกษาที่</h4>
+                        <p>สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง</p></div>
+                        <div class="col-2 d-flex justify-content-center">
+                        <div class="decoration"></div></div>
+                        <div class="col-4">
+                        <h4>ที่อยู่</h4>
+                        <p>บ้านเลขที่ 76 หมู่ที่ 2</p>
+                        <p>ต.บางสะพาน อ.บางสะพานน้อย</p>
+                        <p>จ.ประจวบคีรีขันธ์ 77170</p>
+                        </div>
+                    </div>
+                    <div class="box4 mt-3">
+                    <h2>Contact</h2>
+                        <h4>Tel</h4>
+                        <p>064-6478074</p>
+                        <h4>facebook</h4>
+                        <p>Apirat Palm Jamnongrat</p>
+                        <h4>Line</h4>
+                        <p>palmspirit0860</p>
+                        <h4>Instagram</h4>
+                        <p>_.palm._apj</p>
+                    </div>
+                </div>
+            </div>
+         </section>
+         <!--section4-->
+         <section class="banner5" id="hb">
+            <div class="container">
+                <div class="col-sm-12 d-flex justify-content-center mb-5">
+            <h1>HOBBY</h1>
+            </div>
+            
+                <div class="row d-flex justify-content-around mt-3">
+                    <div class="text-center box mt-3">
+                        <h2 style="font-size:45px;">BASKETBALL</h2>
+
+                        <img src="h1.png" width="70%">
+                    </div>
+                    <div class="text-center box mt-3">
+                        <h2 style="font-size:45px;">GAME</h2>
+
+                        <img src="h2.png" width="70%">
+                    </div>
+                    <div class="text-center box mt-3">
+                        <h2 style="font-size:45px;">MANGA</h2>
+
+                        <img src="h3.png" width="50%">
+                    </div>
+                </div>
+            </div>
+         </section>
+         <!--section5-->
+         <section class="banner3" id="s">
+            <div class="container">
+            <div class="col-sm-12 d-flex justify-content-center mb-5">
+            <h1>MY SKILLS</h1>
+            </div>
+                <div class="row d-flex justify-content-around mt-3"> 
+                    <div class="text-center box2">
+                        <h2>PROGRAMMING SKILLS</h2>
+                        <div class="chart red p-3 mt-2" style="background-color:red;">HTML </div>
+                        <div class="chart blue p-3 mt-2" style="background-color:blue;">CSS</div>
+                        <div class="chart orange p-3 mt-2" style="background-color:orange;">JS</div>
+                        <div class="chart green p-3 mt-2" style="background-color:green;">PYTHON</div>
+                        <div class="chart grey p-3 mt-2" style="background-color:grey;">C</div>
+                    </div>
+                    
+                </div>
+            </div>
+         </section>
+         <!--section6-->
+         <section class="banner5" id="m">
+            <div class="container">
+                <div class="col-sm-12 d-flex justify-content-center mb-5">
+            <h1>ME</h1>
+            </div>
+            <div class="row d-flex justify-content-around mt-3"> 
+            <ul class="slides">
+    <input type="radio" name="radio-btn" id="img-1" checked />
+    <li class="slide-container">
+		<div class="slide">
+			<img src="m1.jpg" />
+        </div>
+		<div class="nav">
+			<label for="img-6" class="prev">&#x2039;</label>
+			<label for="img-2" class="next">&#x203a;</label>
+		</div>
+    </li>
+
+    <input type="radio" name="radio-btn" id="img-2" />
+    <li class="slide-container">
+        <div class="slide">
+          <img src="m2.jpg" />
+        </div>
+		<div class="nav">
+			<label for="img-1" class="prev">&#x2039;</label>
+			<label for="img-3" class="next">&#x203a;</label>
+		</div>
+    </li>
+
+    <input type="radio" name="radio-btn" id="img-3" />
+    <li class="slide-container">
+        <div class="slide">
+          <img src="m3.jpg" />
+        </div>
+		<div class="nav">
+			<label for="img-2" class="prev">&#x2039;</label>
+			<label for="img-4" class="next">&#x203a;</label>
+		</div>
+    </li>
+
+    <input type="radio" name="radio-btn" id="img-4" />
+    <li class="slide-container">
+        <div class="slide">
+          <img src="m4.jpg" />
+        </div>
+		<div class="nav">
+			<label for="img-3" class="prev">&#x2039;</label>
+			<label for="img-5" class="next">&#x203a;</label>
+		</div>
+    </li>
+
+    <input type="radio" name="radio-btn" id="img-5" />
+    <li class="slide-container">
+        <div class="slide">
+          <img src="m5.jpg" />
+        </div>
+		<div class="nav">
+			<label for="img-4" class="prev">&#x2039;</label>
+			<label for="img-6" class="next">&#x203a;</label>
+		</div>
+    </li>
+
+    <input type="radio" name="radio-btn" id="img-6" />
+    <li class="slide-container">
+        <div class="slide">
+          <img src="m6.jpg" />
+        </div>
+		<div class="nav">
+			<label for="img-5" class="prev">&#x2039;</label>
+			<label for="img-1" class="next">&#x203a;</label>
+		</div>
+    </li>
+
+    <li class="nav-dots">
+      <label for="img-1" class="nav-dot" id="img-dot-1"></label>
+      <label for="img-2" class="nav-dot" id="img-dot-2"></label>
+      <label for="img-3" class="nav-dot" id="img-dot-3"></label>
+      <label for="img-4" class="nav-dot" id="img-dot-4"></label>
+      <label for="img-5" class="nav-dot" id="img-dot-5"></label>
+      <label for="img-6" class="nav-dot" id="img-dot-6"></label>
+    </li>
+</ul>
+            
+            </div>
+             
+            
+         </section><div class="footer">
+        <h4>Copyright&copy 63070185 Apirat Jamnongrat</h4>
+    </div>  
+</body>
+</html>
